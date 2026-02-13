@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "vmware.vscode-spring-boot",
+    "vscjava.vscode-maven",
+    "vscjava.vscode-spring-initializr",
+    "ecmel.vscode-html-css",
+    "xabikos.JavaScriptSnippets",
+    "ritwickdey.LiveServer",
+    "mikestead.dotenv",
+    "gabrielbb.vscode-lombok"
+  ],
+  "unwantedRecommendations": []
+}

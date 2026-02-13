@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - School Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'school-blue': '#002147',
+                        'school-gold': '#D4AF37',
+                        'school-red': '#8B0000',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Top Bar (tablet: compact via .top-bar-tablet in styles.css) -->
+    <div class="bg-white text-gray-800 text-xs hidden md:flex items-center fixed w-full z-50 top-0 shadow-sm min-h-8 py-1">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center w-full top-bar-tablet">
+            <div class="flex items-center flex-wrap gap-x-4 gap-y-0.5 top-bar-left">
+                <span class="whitespace-nowrap"><i class="fas fa-map-marker-alt text-school-blue mr-1.5"></i>123 Education Lane</span>
+                <span class="whitespace-nowrap"><i class="fas fa-phone-alt text-school-blue mr-1.5"></i>+1 (234) 567-890</span>
+                <span class="whitespace-nowrap"><i class="fas fa-envelope text-school-blue mr-1.5"></i>info@schooldemo.edu</span>
+            </div>
+            <div class="flex space-x-3 flex-shrink-0">
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (tablet: compact via .nav-tablet in styles.css) -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-school-blue text-white py-2 sm:py-3 md:py-3 shadow-lg top-0 md:top-8 nav-tablet">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center max-w-full">
+            <a href="index.html" class="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold font-serif tracking-wide flex items-center shrink-0">
+                <i class="fas fa-graduation-cap text-school-gold mr-1.5 sm:mr-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl"></i>
+                <span>School<span class="text-school-gold">Demo</span></span>
+            </a>
+
+            <!-- Desktop Menu (visible from 768px) -->
+            <div class="hidden md:flex nav-links space-x-2 lg:space-x-6 xl:space-x-8 items-center font-medium text-xs md:text-sm lg:text-base">
+                <a href="index.html" class="hover:text-school-gold transition whitespace-nowrap">Home</a>
+                <a href="about.html" class="text-school-gold font-bold whitespace-nowrap">About</a>
+                <a href="news.html" class="hover:text-school-gold transition whitespace-nowrap">News</a>
+                <a href="notices.html" class="hover:text-school-gold transition whitespace-nowrap">Notices</a>
+                <a href="events.html" class="hover:text-school-gold transition whitespace-nowrap">Events</a>
+                <a href="contact.html" class="nav-cta bg-school-gold text-school-blue px-3 py-1.5 md:px-6 md:py-2 rounded-full font-bold hover:bg-white hover:text-school-blue transition shadow-lg whitespace-nowrap">Contact Us</a>
+                <a href="login.html" class="nav-admin text-xs border border-white px-2 py-1 md:px-4 md:py-2 rounded-full hover:bg-white hover:text-school-blue transition whitespace-nowrap">Admin Login</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 -m-2 text-xl focus:outline-none touch-manipulation" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-school-blue absolute w-full left-0 top-full shadow-xl fade-in-down">
+            <div class="flex flex-col p-4 sm:p-6 space-y-1 sm:space-y-4 text-center">
+                <a href="index.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Home</a>
+                <a href="about.html" class="block py-3 sm:py-2 text-school-gold font-bold text-sm sm:text-base">About</a>
+                <a href="news.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">News</a>
+                <a href="notices.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Notices</a>
+                <a href="events.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Events</a>
+                <a href="contact.html" class="block py-3 sm:py-2 text-school-gold font-bold text-sm sm:text-base">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-school-blue text-white pt-24 sm:pt-28 md:pt-28 lg:pt-32 pb-12 sm:pb-16 md:pb-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+            <h1 class="text-2xl sm:text-4xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 sm:mb-4 fade-in-up">About Our School</h1>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl text-blue-200 max-w-2xl mx-auto fade-in-up text-center">A legacy of excellence in education, character building, and holistic development.</p>
+        </div>
+    </header>
+
+    <!-- Mission & Vision -->
+    <section class="scroll-reveal py-12 sm:py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-school-blue mb-4 sm:mb-6">Our Mission</h2>
+                    <p class="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 text-justify">
+                        To provide a safe, nurturing, and inclusive environment where every student is empowered to
+                        learn, grow, and thrive. We aim to foster a love for learning, critical thinking, and social
+                        responsibility, preparing our students to become global citizens and future leaders.
+                    </p>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-school-blue mb-4 sm:mb-6">Our Vision</h2>
+                    <p class="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed text-justify">
+                        To be a center of educational excellence, recognized for our commitment to holistic development,
+                        innovation, and character building. We envision a community where students, teachers, and
+                        parents collaborate to achieve the highest standards of academic and personal growth.
+                    </p>
+                </div>
+                <div class="relative order-1 md:order-2">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 sm:w-32 sm:h-32 bg-school-gold/20 rounded-full z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Students Learning" class="relative z-10 rounded-lg shadow-2xl w-full object-cover max-h-56 sm:max-h-none">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History -->
+    <section class="scroll-reveal py-12 sm:py-16 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-school-blue mb-3 sm:mb-4">Our History</h2>
+                <div class="w-16 sm:w-24 h-1 bg-school-gold mx-auto mb-4 sm:mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-justify md:text-justify px-2">
+                    Founded in 1995, School Demo started with a humble vision and a handful of students. Over the
+                    decades, we have grown into a premier institution producing leaders in various fields.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative border-l-4 border-school-blue ml-4 sm:ml-6 md:ml-0 md:pl-0 md:border-none">
+                    <!-- Timeline Items -->
+                    <div class="mb-8 sm:mb-12 md:flex md:items-center md:justify-between group">
+                        <div class="md:w-5/12 md:text-right order-1 pl-4 sm:pl-6 md:pl-0">
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-school-blue">1995</h3>
+                            <p class="text-gray-600 text-sm sm:text-base text-justify">Established with 50 students and 5 teachers.</p>
+                        </div>
+                        <div class="hidden md:block md:w-2/12 text-center order-2">
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-school-gold rounded-full border-4 border-white shadow mx-auto"></div>
+                        </div>
+                        <div class="pl-8 md:pl-0 md:w-5/12 order-3"></div>
+                    </div>
+
+                    <div class="mb-8 sm:mb-12 md:flex md:items-center md:justify-between group">
+                        <div class="md:w-5/12 order-1"></div>
+                        <div class="hidden md:block md:w-2/12 text-center order-2">
+                            <div class="w-8 h-8 bg-school-gold rounded-full border-4 border-white shadow mx-auto"></div>
+                        </div>
+                        <div class="pl-4 sm:pl-6 md:pl-0 md:w-5/12 order-3">
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-school-blue">2005</h3>
+                            <p class="text-gray-600 text-sm sm:text-base text-justify">Expanded to a new campus with state-of-the-art facilities.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 sm:mb-12 md:flex md:items-center md:justify-between group">
+                        <div class="md:w-5/12 md:text-right order-1 pl-4 sm:pl-6 md:pl-0">
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-school-blue">2015</h3>
+                            <p class="text-gray-600 text-sm sm:text-base text-justify">Introduced international curriculum and advanced labs.</p>
+                        </div>
+                        <div class="hidden md:block md:w-2/12 text-center order-2">
+                            <div class="w-8 h-8 bg-school-gold rounded-full border-4 border-white shadow mx-auto"></div>
+                        </div>
+                        <div class="pl-8 md:pl-0 md:w-5/12 order-3"></div>
+                    </div>
+                    <div class="md:flex md:items-center md:justify-between group">
+                        <div class="md:w-5/12 order-1"></div>
+                        <div class="hidden md:block md:w-2/12 text-center order-2">
+                            <div class="w-8 h-8 bg-school-gold rounded-full border-4 border-white shadow mx-auto"></div>
+                        </div>
+                        <div class="pl-4 sm:pl-6 md:pl-0 md:w-5/12 order-3">
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-school-blue">Present</h3>
+                            <p class="text-gray-600 text-sm sm:text-base text-justify">Educating over 1200 students with a focus on innovation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership -->
+    <section class="scroll-reveal py-12 sm:py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-school-blue mb-3 sm:mb-4">Leadership Team</h2>
+                <div class="w-16 sm:w-24 h-1 bg-school-gold mx-auto mb-4 sm:mb-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-8 justify-items-center">
+                <!-- Principal -->
+                <div class="text-center w-full max-w-sm">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=002147&color=fff&size=200"
+                        alt="Principal" class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full mx-auto mb-4 sm:mb-6 shadow-lg object-cover">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">Dr. John Doe</h3>
+                    <p class="text-school-gold font-medium text-sm sm:text-base text-center">Principal</p>
+                    <p class="text-gray-500 mt-2 text-xs sm:text-sm max-w-xs mx-auto text-center">"Leading with vision and a commitment to student success."</p>
+                </div>
+                <!-- Vice Principal -->
+                <div class="text-center w-full max-w-sm">
+                    <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=002147&color=fff&size=200"
+                        alt="Vice Principal" class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full mx-auto mb-4 sm:mb-6 shadow-lg object-cover">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">Mrs. Jane Smith</h3>
+                    <p class="text-school-gold font-medium text-sm sm:text-base text-center">Vice Principal</p>
+                    <p class="text-gray-500 mt-2 text-xs sm:text-sm max-w-xs mx-auto text-center">"Ensuring academic excellence and discipline across all grades."</p>
+                </div>
+                <!-- Admin Head -->
+                <div class="text-center w-full max-w-sm">
+                    <img src="https://ui-avatars.com/api/?name=Robert+Brown&background=002147&color=fff&size=200"
+                        alt="Admin Head" class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full mx-auto mb-4 sm:mb-6 shadow-lg object-cover">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">Mr. Robert Brown</h3>
+                    <p class="text-school-gold font-medium text-sm sm:text-base text-center">Head of Administration</p>
+                    <p class="text-gray-500 mt-2 text-xs sm:text-sm max-w-xs mx-auto text-center">"Managing operations to provide a seamless environment."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (tablet: 2 cols, compact via .footer-tablet in styles.css) -->
+    <footer id="contact" class="bg-gray-900 text-white pt-12 sm:pt-14 md:pt-16 pb-6 sm:pb-8 border-t-4 border-school-gold footer-tablet">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
+                <div>
+                    <a href="index.html" class="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold font-serif tracking-wide flex items-center mb-3 sm:mb-4 md:mb-6">
+                        <i class="fas fa-graduation-cap text-school-gold mr-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl"></i>
+                        <span>School<span class="text-school-gold">Demo</span></span>
+                    </a>
+                    <p class="footer-text text-gray-400 leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm md:text-sm text-justify">
+                        Empowering students to query freely, think critically, and act responsibly.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 md:mb-6 text-school-gold">Quick Links</h3>
+                    <ul class="space-y-2 md:space-y-3 text-sm md:text-base">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>About Us</a></li>
+                        <li><a href="admissions.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Admissions</a></li>
+                        <li><a href="news.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>News</a>
+                        </li>
+                        <li><a href="notices.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Notices</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Events</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 md:mb-6 text-school-gold">Academics</h3>
+                    <ul class="space-y-2 md:space-y-3 text-sm md:text-base">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Pre-Primary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Primary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Secondary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>High School</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 md:mb-6 text-school-gold">Contact Info</h3>
+                    <ul class="space-y-3 md:space-y-4 text-gray-400 mb-4 md:mb-6 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-school-gold"></i>
+                            <span>123 Education Lane, Knowledge City, Country 56789</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-school-gold"></i>
+                            <span>+1 (234) 567-890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-school-gold"></i>
+                            <span>info@schooldemo.edu</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 mt-6 sm:mt-8 text-center text-gray-500 text-xs sm:text-sm">
+                <p>&copy; 2026 School Demo. All Rights Reserved. | Designed with <i
+                        class="fas fa-heart text-school-red"></i> by NesQByte</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/scroll-reveal.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        $('#mobile-menu-btn').click(function () {
+            $('#mobile-menu').toggleClass('hidden');
+        });
+    </script>
+</body>
+
+</html>

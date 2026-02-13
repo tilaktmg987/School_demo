@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Demo - Excellence in Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'school-blue': '#002147',
+                        'school-gold': '#D4AF37',
+                        'school-red': '#8B0000',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-school-blue text-white py-2 sm:py-3 md:py-3 shadow-lg nav-tablet">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center max-w-full">
+            <a href="index.html" class="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold font-serif tracking-wide flex items-center shrink-0">
+                <i class="fas fa-user-shield text-school-gold mr-1.5 sm:mr-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl"></i>
+                <span>Admin<span class="text-school-gold">Dashboard</span></span>
+            </a>
+
+            <div class="hidden md:flex nav-links space-x-2 lg:space-x-6 xl:space-x-8 items-center font-medium text-xs md:text-sm lg:text-base">
+                <a href="#news" class="hover:text-school-gold transition">Manage News</a>
+                <a href="#notices" class="hover:text-school-gold transition">Manage Notices</a>
+                <a href="#events" class="hover:text-school-gold transition">Manage Events</a>
+                <button onclick="logout()"
+                    class="bg-red-600 text-white px-3 py-1.5 md:px-6 md:py-2 rounded-full font-bold hover:bg-red-700 transition shadow-lg text-sm md:text-base whitespace-nowrap">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quick Spacer -->
+    <div class="h-20 sm:h-24"></div>
+
+    <!-- Dashboard Grid -->
+    <div class="container mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16">
+            <!-- News Card -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden transform hover:-translate-y-1">
+                <div class="h-2 bg-school-blue"></div>
+                <div class="p-4 sm:p-8">
+                    <div class="flex justify-between items-start mb-4 sm:mb-6">
+                        <div class="bg-blue-100 p-2.5 sm:p-3 rounded-full text-school-blue">
+                            <i class="fas fa-newspaper text-xl sm:text-2xl"></i>
+                        </div>
+                        <span
+                            class="bg-blue-100 text-school-blue text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wide">News</span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-800 mb-2">Latest News</h3>
+                    <p class="text-gray-500 text-sm mb-4 sm:mb-6">Manage school news and announcements.</p>
+                    <button onclick="scrollToSection('news')"
+                        class="w-full border border-school-blue text-school-blue font-bold py-2 rounded-lg hover:bg-school-blue hover:text-white transition text-sm sm:text-base touch-manipulation">
+                        Manage News
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notices Card -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden transform hover:-translate-y-1">
+                <div class="h-2 bg-school-gold"></div>
+                <div class="p-4 sm:p-8">
+                    <div class="flex justify-between items-start mb-4 sm:mb-6">
+                        <div class="bg-yellow-100 p-2.5 sm:p-3 rounded-full text-school-gold">
+                            <i class="fas fa-bullhorn text-xl sm:text-2xl"></i>
+                        </div>
+                        <span
+                            class="bg-yellow-100 text-school-gold text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wide">Notices</span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-800 mb-2">Important Notices</h3>
+                    <p class="text-gray-500 text-sm mb-4 sm:mb-6">Update urgent alerts and notices.</p>
+                    <button onclick="scrollToSection('notices')"
+                        class="w-full border border-school-gold text-school-gold font-bold py-2 rounded-lg hover:bg-school-gold hover:text-white transition text-sm sm:text-base touch-manipulation">
+                        Manage Notices
+                    </button>
+                </div>
+            </div>
+
+            <!-- Events Card -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden transform hover:-translate-y-1">
+                <div class="h-2 bg-school-red"></div>
+                <div class="p-4 sm:p-8">
+                    <div class="flex justify-between items-start mb-4 sm:mb-6">
+                        <div class="bg-red-100 p-2.5 sm:p-3 rounded-full text-school-red">
+                            <i class="fas fa-calendar-alt text-xl sm:text-2xl"></i>
+                        </div>
+                        <span
+                            class="bg-red-100 text-school-red text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wide">Events</span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-800 mb-2">Upcoming Events</h3>
+                    <p class="text-gray-500 text-sm mb-4 sm:mb-6">Schedule and organize school events.</p>
+                    <button onclick="scrollToSection('events')"
+                        class="w-full border border-school-red text-school-red font-bold py-2 rounded-lg hover:bg-school-red hover:text-white transition text-sm sm:text-base touch-manipulation">
+                        Manage Events
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Images Section -->
+    <section id="hero-images" class="scroll-reveal py-12 sm:py-20 bg-gray-50 border-t border-b">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-school-blue mb-4">Manage Hero Images</h2>
+                <div class="w-16 sm:w-24 h-1 bg-school-gold mx-auto mb-4 sm:mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">Upload high-quality images for the homepage slider. <br>MAX 5
+                    IMAGES | Recommended Size: 1920x1080px</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-4 sm:p-8 md:p-12">
+                <!-- Upload Area -->
+                <form id="addHeroImageForm" class="mb-12">
+                    <div class="flex flex-col items-center justify-center w-full">
+                        <label for="heroImageFile" id="hero-drop-zone"
+                            class="flex flex-col items-center justify-center w-full h-48 border-2 border-school-blue border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition duration-300 group">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <i
+                                    class="fas fa-cloud-upload-alt text-4xl text-gray-400 group-hover:text-school-blue mb-3 transition"></i>
+                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold text-school-blue">Click
+                                        to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-400">SVG, PNG, JPG or GIF (MAX. 5 images)</p>
+                            </div>
+                            <input id="heroImageFile" type="file" class="hidden" accept="image/*" multiple />
+                        </label>
+                        <div id="file-chosen" class="mt-2 text-sm text-gray-600 font-medium">No file chosen</div>
+
+                    </div>
+                    <div class="mt-4 sm:mt-6 text-center">
+                        <button type="submit" id="uploadHeroBtn"
+                            class="bg-school-blue text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-blue-900 transition shadow-lg transform hover:-translate-y-1 text-sm sm:text-base touch-manipulation">
+                            <i class="fas fa-upload mr-2"></i> Upload Images
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Image Grid -->
+                <div id="hero-images-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Hero Images Loaded Here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="scroll-reveal py-12 sm:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-8 sm:mb-12 border-b pb-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-school-blue mb-2">Latest News Management</h2>
+                    <p class="text-gray-500 text-sm sm:text-base">Add, edit, or remove news articles.</p>
+                </div>
+                <button onclick="toggleModal('newsModal')"
+                    class="bg-school-blue text-white px-4 sm:px-6 py-2 rounded-lg font-bold hover:bg-blue-900 transition shadow-md flex items-center justify-center gap-2 text-sm sm:text-base touch-manipulation w-full sm:w-auto">
+                    <i class="fas fa-plus"></i> Add News
+                </button>
+            </div>
+            <div id="news-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <!-- News Items loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Notices Section -->
+    <section id="notices" class="scroll-reveal py-12 sm:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-8 sm:mb-12 border-b border-gray-300 pb-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-school-blue mb-2">Notice Board Management</h2>
+                    <p class="text-gray-500 text-sm sm:text-base">Post urgent notices for students and staff.</p>
+                </div>
+                <button onclick="toggleModal('noticeModal')"
+                    class="bg-school-gold text-school-blue px-4 sm:px-6 py-2 rounded-lg font-bold hover:bg-white transition shadow-md flex items-center justify-center gap-2 text-sm sm:text-base touch-manipulation w-full sm:w-auto">
+                    <i class="fas fa-plus"></i> Add Notice
+                </button>
+            </div>
+            <div id="notices-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <!-- Notices loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="scroll-reveal py-12 sm:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-8 sm:mb-12 border-b pb-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-school-blue mb-2">Event Schedule Management</h2>
+                    <p class="text-gray-500 text-sm sm:text-base">Organize upcoming school events.</p>
+                </div>
+                <button onclick="toggleModal('eventModal')"
+                    class="bg-school-blue text-white px-4 sm:px-6 py-2 rounded-lg font-bold hover:bg-blue-900 transition shadow-md flex items-center justify-center gap-2 text-sm sm:text-base touch-manipulation w-full sm:w-auto">
+                    <i class="fas fa-plus"></i> Add Event
+                </button>
+            </div>
+            <div id="events-container" class="space-y-4 sm:space-y-6 max-w-4xl mx-auto">
+                <!-- Events loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white pt-12 sm:pt-16 pb-6 sm:pb-8 border-t-4 border-school-gold">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
+                <div>
+                    <a href="index.html" class="text-xl sm:text-2xl font-bold font-serif tracking-wide flex items-center mb-4 sm:mb-6">
+                        <i class="fas fa-graduation-cap text-school-gold mr-2 text-2xl sm:text-3xl"></i>
+                        <span>School<span class="text-school-gold">Demo</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+                        Empowering students to query freely, think critically, and act responsibly.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-school-gold">Quick Links</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> About Us</a></li>
+                        <li><a href="#admissions" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> Admissions</a></li>
+                        <li><a href="#news" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> News & Updates</a></li>
+                        <li><a href="#contact" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-school-gold">Contact Info</h3>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-school-gold"></i>
+                            <span>123 Education Lane, Knowledge City, Country 56789</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-school-gold"></i>
+                            <span>+1 (234) 567-890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-school-gold"></i>
+                            <span>info@schooldemo.edu</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-school-gold">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates.</p>
+                    <form class="flex flex-col gap-2">
+                        <input type="email" placeholder="Your Email Address"
+                            class="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:border-school-gold">
+                        <button type="submit"
+                            class="bg-school-gold text-school-blue font-bold px-4 py-2 rounded hover:bg-white transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 mt-6 sm:mt-8 text-center text-gray-500 text-xs sm:text-sm">
+                <p>&copy; 2026 School Demo. All Rights Reserved. Designed with Excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (Hidden by default) -->
+    <!-- Reuse existing modals but style them better -->
+    <div id="newsModal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="toggleModal('newsModal')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 border-b border-gray-200 flex justify-between items-center">
+                    <h3 class="text-xl leading-6 font-bold text-school-blue flex items-center" id="modal-title">
+                        <i class="fas fa-newspaper mr-2"></i> Add News Post
+                    </h3>
+                    <button onclick="toggleModal('newsModal')"
+                        class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 max-h-[80vh] overflow-y-auto">
+                    <form id="addNewsForm" class="space-y-6">
+
+                        <!-- Section 1: Basic Information -->
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <h4
+                                class="text-sm font-bold text-school-blue uppercase tracking-wide mb-3 border-b border-blue-200 pb-1">
+                                Basic Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="col-span-2">
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">News Title <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="text" id="newsTitle" placeholder="Enter an engaging title"
+                                        class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition"
+                                        required>
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Short
+                                        Summary</label>
+                                    <input type="text" id="newsSummary" placeholder="Brief overview (max 150 chars)"
+                                        maxlength="150"
+                                        class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Author / Admin
+                                        Name</label>
+                                    <input type="text" id="newsAuthor" placeholder="e.g. Admin, Principal"
+                                        class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Publish Date
+                                        <span class="text-red-500">*</span></label>
+                                    <input type="date" id="newsDate"
+                                        class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Detailed Content -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="block text-gray-700 text-xs font-bold uppercase">News Content <span
+                                        class="text-red-500">*</span></label>
+                                <span class="text-xs text-gray-400">Detailed description</span>
+                            </div>
+                            <textarea id="newsContent" placeholder="Write the full news content here..."
+                                class="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition h-40"
+                                required></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Category</label>
+                                <select id="newsCategory"
+                                    class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition">
+                                    <option value="General">General News</option>
+                                    <option value="Academic">Academic</option>
+                                    <option value="Event">Event</option>
+                                    <option value="Achievement">Achievement</option>
+                                    <option value="Sports">Sports</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Event Date
+                                    (Optional)</label>
+                                <input type="date" id="newsEventDate"
+                                    class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition">
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Media -->
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <h4
+                                class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3 border-b border-gray-300 pb-1">
+                                Media & Visibility</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="col-span-2 md:col-span-1">
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Featured
+                                        Image</label>
+                                    <input type="file" id="newsImageFile" accept="image/*"
+                                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-school-blue file:text-white hover:file:bg-blue-900 transition cursor-pointer">
+                                </div>
+                                <div class="col-span-2 md:col-span-1">
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Image
+                                        Caption</label>
+                                    <input type="text" id="newsImageCaption" placeholder="Optional caption"
+                                        class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue focus:border-transparent transition">
+                                </div>
+
+                                <div>
+                                    <label
+                                        class="block text-gray-700 text-xs font-bold mb-1 uppercase">Visibility</label>
+                                    <select id="newsVisibility"
+                                        class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-school-blue h-9 text-sm">
+                                        <option value="Public">Public (Everyone)</option>
+                                        <option value="Private">Private (Internal)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-xs font-bold mb-1 uppercase">Status</label>
+                                    <select id="newsStatus"
+                                        class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-school-blue h-9 text-sm">
+                                        <option value="Publish">Publish Now</option>
+                                        <option value="Draft">Save as Draft</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-4 border-t border-gray-100">
+                            <button type="button" onclick="toggleModal('newsModal')"
+                                class="bg-gray-100 text-gray-700 px-5 py-2 rounded-lg mr-3 hover:bg-gray-200 transition font-medium text-sm">Cancel</button>
+                            <button type="submit"
+                                class="bg-school-blue text-white px-8 py-2 rounded-lg font-bold hover:bg-blue-900 transition shadow-md transform hover:-translate-y-0.5 text-sm flex items-center">
+                                <i class="fas fa-save mr-2"></i> Save News Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="noticeModal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="toggleModal('noticeModal')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <h3 class="text-2xl leading-6 font-bold text-school-blue mb-4">Add Important Notice</h3>
+                    <form id="addNoticeForm">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Title</label>
+                            <input type="text" id="noticeTitle"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue"
+                                placeholder="Notice title" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">PDF File</label>
+                            <input type="file" id="noticePdfFile" accept=".pdf,application/pdf"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue"
+                                required>
+                            <p class="text-gray-500 text-xs mt-1">Upload notice as PDF only.</p>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Date</label>
+                            <input type="date" id="noticeDate"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue"
+                                required>
+                        </div>
+                        <div class="flex justify-end mt-6">
+                            <button type="button" onclick="toggleModal('noticeModal')"
+                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-3 hover:bg-gray-400 transition">Cancel</button>
+                            <button type="submit"
+                                class="bg-school-gold text-school-blue px-6 py-2 rounded font-bold hover:bg-yellow-500 transition shadow-lg">Post
+                                Notice</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="eventModal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="toggleModal('eventModal')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <h3 class="text-2xl leading-6 font-bold text-school-blue mb-4">Add Upcoming Event</h3>
+                    <form id="addEventForm">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Event Title</label>
+                            <input type="text" id="eventTitle"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue"
+                                placeholder="Upcoming event title" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Event Image</label>
+                            <input type="file" id="eventImageFile" accept="image/*"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-school-blue"
+                                required>
+                        </div>
+                        <div class="flex justify-end mt-6">
+                            <button type="button" onclick="toggleModal('eventModal')"
+                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-3 hover:bg-gray-400 transition">Cancel</button>
+                            <button type="submit"
+                                class="bg-school-blue text-white px-6 py-2 rounded font-bold hover:bg-blue-900 transition shadow-lg">Save
+                                Event</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/scroll-reveal.js"></script>
+</body>
+
+</html>

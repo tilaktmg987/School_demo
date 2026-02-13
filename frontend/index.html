@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Demo - Excellence in Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'school-blue': '#002147',
+                        'school-gold': '#D4AF37',
+                        'school-red': '#8B0000',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        display: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .news-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .news-card:hover::before {
+            left: 100%;
+        }
+
+        .notice-item {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #D4AF37;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .notice-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-width: 8px;
+            transform: translateX(10px);
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-card:hover {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            box-shadow: 0 20px 40px rgba(0, 33, 71, 0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #002147 0%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .decorative-line {
+            position: relative;
+            display: inline-block;
+        }
+
+        .decorative-line::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        .news-category-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+        }
+
+        .event-date-box {
+            background: linear-gradient(135deg, #002147 0%, #003d7a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-date-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+    <!-- Top Bar (tablet: compact via .top-bar-tablet in styles.css) -->
+    <div
+        class="bg-white text-gray-800 text-xs hidden md:flex items-center fixed w-full z-50 top-0 shadow-sm min-h-8 py-1">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center w-full top-bar-tablet">
+            <div class="flex items-center flex-wrap gap-x-4 gap-y-0.5 top-bar-left">
+                <span class="whitespace-nowrap"><i class="fas fa-map-marker-alt text-school-blue mr-1.5"></i>123
+                    Education Lane</span>
+                <span class="whitespace-nowrap"><i class="fas fa-phone-alt text-school-blue mr-1.5"></i>+1 (234)
+                    567-890</span>
+                <span class="whitespace-nowrap"><i
+                        class="fas fa-envelope text-school-blue mr-1.5"></i>info@schooldemo.edu</span>
+            </div>
+            <div class="flex space-x-3 flex-shrink-0">
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (tablet: compact via .nav-tablet in styles.css) -->
+    <nav id="navbar"
+        class="fixed w-full z-50 transition-all duration-300 bg-transparent text-white py-2 sm:py-3 md:py-3 top-0 md:top-8 nav-tablet">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center max-w-full">
+            <a href="index.html"
+                class="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold font-serif tracking-wide flex items-center shrink-0">
+                <i
+                    class="fas fa-graduation-cap text-school-gold mr-1.5 sm:mr-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl"></i>
+                <span>School<span class="text-school-gold">Demo</span></span>
+            </a>
+
+            <!-- Desktop Menu (visible from tablet 768px up; mobile menu below 768px) -->
+            <div
+                class="hidden md:flex nav-links space-x-2 lg:space-x-6 xl:space-x-8 items-center font-medium text-xs md:text-sm lg:text-base">
+                <a href="index.html" class="hover:text-school-gold transition whitespace-nowrap">Home</a>
+                <a href="about.html" class="hover:text-school-gold transition whitespace-nowrap">About</a>
+                <a href="news.html" class="hover:text-school-gold transition whitespace-nowrap">News</a>
+                <a href="notices.html" class="hover:text-school-gold transition whitespace-nowrap">Notices</a>
+                <a href="events.html" class="hover:text-school-gold transition whitespace-nowrap">Events</a>
+                <a href="contact.html"
+                    class="nav-cta bg-school-gold text-school-blue px-3 py-1.5 md:px-6 md:py-2 rounded-full font-bold hover:bg-white hover:text-school-blue transition shadow-lg whitespace-nowrap">Contact
+                    Us</a>
+                <a href="login.html"
+                    class="nav-admin text-xs border border-white px-2 py-1 md:px-4 md:py-2 rounded-full hover:bg-white hover:text-school-blue transition whitespace-nowrap">Admin
+                    Login</a>
+            </div>
+
+            <!-- Mobile Menu Button (below 768px) -->
+            <button id="mobile-menu-btn"
+                class="md:hidden p-2 -m-2 text-xl sm:text-2xl focus:outline-none touch-manipulation" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-school-blue absolute w-full left-0 top-full shadow-xl fade-in-down">
+            <div class="flex flex-col p-4 sm:p-6 space-y-1 sm:space-y-4 text-center">
+                <a href="index.html"
+                    class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Home</a>
+                <a href="about.html"
+                    class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">About</a>
+                <a href="news.html"
+                    class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">News</a>
+                <a href="notices.html"
+                    class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Notices</a>
+                <a href="events.html"
+                    class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Events</a>
+                <a href="contact.html"
+                    class="block py-3 sm:py-2 text-school-gold font-bold text-sm sm:text-base">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
+        <!-- Swiper -->
+        <div class="swiper mySwiper h-full w-full absolute inset-0 z-0">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide relative">
+                    <img src="images/hero.png" alt="School Campus" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                </div>
+                <!-- Slide 2 (Placeholder) -->
+                <div class="swiper-slide relative">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+                        alt="Students" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                </div>
+                <!-- Slide 3 (Placeholder) -->
+                <div class="swiper-slide relative">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+                        alt="Library" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next text-white/50 hover:text-white transition"></div>
+            <div class="swiper-button-prev text-white/50 hover:text-white transition"></div>
+        </div>
+
+        <div
+            class="relative z-10 text-center sm:text-right px-4 sm:px-6 md:px-8 max-w-4xl w-full sm:ml-auto sm:mr-4 md:mr-12 lg:mr-24 fade-in-up pointer-events-none">
+            <h2 class="text-school-gold font-bold text-xs sm:text-lg md:text-xl uppercase tracking-widest mb-2 sm:mb-4">
+                Welcome to Excellence</h2>
+            <h1
+                class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
+                Empowering Future Leaders</h1>
+            <p
+                class="text-gray-200 text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 md:mb-10 max-w-2xl mx-auto sm:ml-auto sm:mr-0">
+                Providing world-class education with a focus on holistic development, innovation, and character
+                building.</p>
+            <div class="flex flex-col sm:flex-row justify-center sm:justify-end gap-3 sm:gap-4 pointer-events-auto">
+                <a href="#about"
+                    class="bg-school-gold text-school-blue px-5 py-2.5 sm:px-8 sm:py-3 rounded-full font-bold text-sm sm:text-base md:text-lg hover:bg-white transition shadow-lg">Discover
+                    More</a>
+                <a href="#contact"
+                    class="border-2 border-white text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full font-bold text-sm sm:text-base md:text-lg hover:bg-white hover:text-school-blue transition">Admissions</a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 sm:bottom-10 left-0 right-0 text-center text-white animate-bounce z-20">
+            <a href="#stats" class="text-xl sm:text-2xl inline-block p-2"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section id="stats"
+        class="scroll-reveal py-8 sm:py-10 md:py-12 bg-white relative container mx-auto rounded-lg shadow-2xl max-w-6xl mt-4 sm:mt-8 mx-4 sm:mx-auto md:mx-auto">
+        <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+            <div class="p-3 sm:p-4 md:p-4">
+                <i class="fas fa-user-graduate text-2xl sm:text-4xl text-school-blue mb-1 sm:mb-2"></i>
+                <div class="text-2xl sm:text-4xl font-bold text-school-blue counter" data-target="1200">0</div>
+                <div class="text-gray-500 uppercase text-xs sm:text-sm tracking-wide mt-1">Students</div>
+            </div>
+            <div class="p-3 sm:p-4">
+                <i class="fas fa-chalkboard-teacher text-2xl sm:text-4xl text-school-blue mb-1 sm:mb-2"></i>
+                <div class="text-2xl sm:text-4xl font-bold text-school-blue counter" data-target="85">0</div>
+                <div class="text-gray-500 uppercase text-xs sm:text-sm tracking-wide mt-1">Teachers</div>
+            </div>
+            <div class="p-3 sm:p-4">
+                <i class="fas fa-trophy text-2xl sm:text-4xl text-school-blue mb-1 sm:mb-2"></i>
+                <div class="text-2xl sm:text-4xl font-bold text-school-blue counter" data-target="50">0</div>
+                <div class="text-gray-500 uppercase text-xs sm:text-sm tracking-wide mt-1">Awards</div>
+            </div>
+            <div class="p-3 sm:p-4">
+                <i class="fas fa-building text-2xl sm:text-4xl text-school-blue mb-1 sm:mb-2"></i>
+                <div class="text-2xl sm:text-4xl font-bold text-school-blue counter" data-target="25">0</div>
+                <div class="text-gray-500 uppercase text-xs sm:text-sm tracking-wide mt-1">Years of Excellence</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="scroll-reveal py-12 sm:py-16 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-8 sm:gap-10 md:gap-12">
+                <div class="md:w-1/2 relative w-full">
+                    <div class="absolute -top-4 -left-4 w-16 sm:w-24 h-16 sm:h-24 bg-school-gold/20 rounded-full z-0">
+                    </div>
+                    <div
+                        class="absolute -bottom-4 -right-4 w-24 sm:w-32 h-24 sm:h-32 bg-school-blue/10 rounded-full z-0">
+                    </div>
+                    <img src="../principle.png" alt="Principal"
+                        class="relative z-10 rounded-lg shadow-2xl w-full object-cover h-64 sm:h-80 md:h-96">
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <h4 class="text-school-blue font-bold uppercase tracking-wider mb-2 text-sm sm:text-base">About Us
+                    </h4>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4 sm:mb-6">
+                        Nurturing Minds, Building Character</h2>
+                    <p class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+                        At School Demo, we believe in providing an environment where every student can thrive. Our
+                        curriculum is designed to challenge students academically while fostering creativity, critical
+                        thinking, and social responsibility.
+                    </p>
+                    <p class="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+                        With state-of-the-art facilities and a dedicated faculty, we are committed to preparing our
+                        students for the challenges of the future. Join us in our journey of excellence.
+                    </p>
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <img src="https://ui-avatars.com/api/?name=Tilak+Tamang&background=002147&color=fff"
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full shrink-0">
+                        <div>
+                            <p class="font-bold text-gray-900">Mr. Tilak Tamang</p>
+                            <p class="text-sm text-gray-500">Principal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED NEWS SECTION -->
+    <section id="news"
+        class="scroll-reveal py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-school-gold/5 rounded-full blur-3xl -mr-48 -mt-48"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-school-blue/5 rounded-full blur-3xl -ml-48 -mb-48"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                <div class="inline-block mb-3 sm:mb-4">
+                    <span
+                        class="text-school-gold font-semibold text-xs sm:text-sm uppercase tracking-widest px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border-2 border-school-gold/20 bg-school-gold/5">Stories
+                        That Matter</span>
+                </div>
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 sm:mb-6">
+                    <span class="gradient-text decorative-line">Latest Highlights</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed px-2">
+                    Discover the stories, achievements, and moments that shape our vibrant community
+                </p>
+            </div>
+
+            <div id="news-container"
+                class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
+                <!-- News Items loaded via JS -->
+            </div>
+
+            <div class="text-center">
+                <a href="news.html"
+                    class="group inline-flex items-center gap-2 sm:gap-3 bg-school-blue text-white px-5 py-2.5 sm:px-10 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-school-gold hover:text-school-blue transition-all duration-300 shadow-xl">
+                    Explore All Stories
+                    <i
+                        class="fas fa-arrow-right group-hover:translate-x-2 transition-transform text-sm sm:text-base"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED NOTICES SECTION -->
+    <section id="notices"
+        class="scroll-reveal py-12 sm:py-16 md:py-20 bg-school-blue text-white relative overflow-hidden">
+        <!-- Animated Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-0 left-0 w-full h-full"
+                style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;">
+            </div>
+        </div>
+
+        <!-- Decorative Blobs -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32 animate-float">
+        </div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-school-gold/10 rounded-full blur-3xl -ml-32 -mb-32 animate-float"
+            style="animation-delay: 1s;"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                <div class="inline-block mb-3 sm:mb-4">
+                    <span
+                        class="text-school-gold font-semibold text-xs sm:text-sm uppercase tracking-widest px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border-2 border-school-gold/40 bg-school-gold/10">Stay
+                        Informed</span>
+                </div>
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 sm:mb-6 text-white">
+                    <span class="decorative-line">Important Announcements</span>
+                </h2>
+                <p class="text-blue-200 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed px-2">
+                    Keep track of key dates, deadlines, and updates from our administration
+                </p>
+            </div>
+
+            <div id="notices-container" class="max-w-5xl mx-auto space-y-3 sm:space-y-4 mb-8 sm:mb-12">
+                <!-- Notices loaded via JS -->
+            </div>
+
+            <div class="text-center mt-8 sm:mt-12">
+                <a href="notices.html"
+                    class="group inline-flex items-center gap-2 sm:gap-3 bg-school-gold text-school-blue px-5 py-2.5 sm:px-10 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white transition-all duration-300 shadow-xl">
+                    View All Notices
+                    <i
+                        class="fas fa-chevron-right group-hover:translate-x-2 transition-transform text-sm sm:text-base"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED EVENTS SECTION -->
+    <section id="events"
+        class="scroll-reveal py-12 sm:py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div
+            class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-32 bg-gradient-to-b from-school-blue/5 to-transparent">
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                <div class="inline-block mb-3 sm:mb-4">
+                    <span
+                        class="text-school-blue font-semibold text-xs sm:text-sm uppercase tracking-widest px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border-2 border-school-blue/20 bg-school-blue/5">Coming
+                        Soon</span>
+                </div>
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 sm:mb-6">
+                    <span class="gradient-text decorative-line">Upcoming Events</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed px-2">
+                    Mark your calendars for these exciting opportunities to connect and celebrate
+                </p>
+            </div>
+
+            <div id="events-container" class="max-w-4xl mx-auto space-y-4 sm:space-y-6 mb-8 sm:mb-12">
+                <!-- Events loaded via JS -->
+            </div>
+
+            <div class="text-center">
+                <a href="events.html"
+                    class="group inline-flex items-center gap-2 sm:gap-3 bg-school-blue text-white px-5 py-2.5 sm:px-10 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-school-gold hover:text-school-blue transition-all duration-300 shadow-xl">
+                    See Full Calendar
+                    <i class="fas fa-calendar-alt group-hover:scale-110 transition-transform text-sm sm:text-base"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="scroll-reveal py-12 sm:py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-school-blue mb-3 sm:mb-4">School
+                    Gallery</h2>
+                <div class="w-16 sm:w-24 h-1 bg-school-gold mx-auto mb-4 sm:mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-2">Explore our vibrant School Gallery
+                    and the activities that make our school unique.</p>
+            </div>
+
+            <!-- Swiper -->
+            <div class="swiper gallerySwiper pb-12">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Sports" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Classroom" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Library" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Science Lab" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Sports" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Classroom" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Library" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Science Lab" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (tablet: 2 cols, compact text via .footer-tablet in styles.css) -->
+    <footer id="contact"
+        class="scroll-reveal bg-gray-900 text-white pt-12 sm:pt-14 md:pt-16 pb-6 sm:pb-8 border-t-4 border-school-gold footer-tablet">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
+                <div>
+                    <a href="index.html"
+                        class="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold font-serif tracking-wide flex items-center mb-3 sm:mb-4 md:mb-6">
+                        <i
+                            class="fas fa-graduation-cap text-school-gold mr-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl"></i>
+                        <span>School<span class="text-school-gold">Demo</span></span>
+                    </a>
+                    <p class="footer-text text-gray-400 leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm md:text-sm">
+                        Empowering students to query freely, think critically, and act responsibly.
+                    </p>
+                    <div class="flex space-x-3 sm:space-x-4">
+                        <a href="#"
+                            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition text-sm"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 md:mb-6 text-school-gold">Quick Links</h3>
+                    <ul class="space-y-2 md:space-y-3 text-gray-400 text-sm md:text-base">
+                        <li><a href="#" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> About Us</a></li>
+                        <li><a href="#admissions" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> Admissions</a></li>
+                        <li><a href="#news" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> News & Updates</a></li>
+                        <li><a href="#contact" class="hover:text-white transition"><i
+                                    class="fas fa-angle-right mr-2 text-school-gold"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 md:mb-6 text-school-gold">Contact Info</h3>
+                    <ul class="space-y-3 md:space-y-4 text-gray-400 mb-4 md:mb-6 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-school-gold"></i>
+                            <span>123 Education Lane, Knowledge City, Country 56789</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-school-gold"></i>
+                            <span>+1 (234) 567-890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-school-gold"></i>
+                            <span>info@schooldemo.edu</span>
+                        </li>
+                    </ul>
+                    <!-- Google Map Embed -->
+                    <div class="footer-map rounded-lg overflow-hidden h-32 sm:h-40 shadow-lg border border-gray-700">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14130.857353934944!2d85.3240034!3d27.7007693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600!5e0!3m2!1sen!2snp!4v1645517392945!5m2!1sen!2snp"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 md:mb-6 text-school-gold">Newsletter</h3>
+                    <p class="footer-text text-gray-400 mb-3 md:mb-4 text-sm md:text-base">Subscribe to our newsletter
+                        for the latest updates.</p>
+                    <form class="flex flex-col gap-2">
+                        <input type="email" placeholder="Your Email Address"
+                            class="bg-gray-800 border border-gray-700 text-white px-3 md:px-4 py-1.5 md:py-2 rounded focus:outline-none focus:border-school-gold text-sm">
+                        <button type="submit"
+                            class="bg-school-gold text-school-blue font-bold px-3 md:px-4 py-1.5 md:py-2 rounded hover:bg-white transition text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 text-center text-gray-500 text-xs sm:text-sm px-2">
+                <p>&copy; 2026 School Demo. All Rights Reserved. Designed with <i
+                        class="fas fa-heart text-school-red"></i> by NesQByte</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- News Detail Modal (responsive for 320px+) -->
+    <div id="newsDetailModal"
+        class="hidden fixed inset-0 bg-black/70 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto overflow-x-hidden">
+        <div
+            class="news-detail-modal-inner bg-white rounded-t-2xl sm:rounded-xl max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-8 relative shadow-2xl overflow-y-auto overflow-x-hidden flex flex-col">
+            <button onclick="toggleModal('newsDetailModal')" type="button"
+                class="sticky top-2 right-2 sm:top-4 sm:right-4 float-right shrink-0 z-10 text-gray-400 hover:text-gray-600 text-lg sm:text-2xl bg-white rounded-full w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition touch-manipulation"
+                aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="newsDetailContent" class="p-4 sm:p-6 md:p-12 clear-both overflow-x-hidden min-h-0 flex-1">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/scroll-reveal.js"></script>
+</body>
+
+</html>

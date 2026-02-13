@@ -1,0 +1,270 @@
+/* Custom styles to complement Tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Text justify for body paragraphs and article-style content where possible */
+p {
+    text-align: justify;
+}
+.prose p,
+.article-content p,
+#newsDetailContent p,
+.text-justify {
+    text-align: justify;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Navbar Transition */
+.navbar-scrolled {
+    background-color: #002147 !important;
+    /* school-blue */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* Animations */
+@keyframes slowZoom {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.animate-slow-zoom {
+    animation: slowZoom 20s infinite alternate;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.5s ease-out forwards;
+}
+
+/* Smooth Scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better mobile tap experience */
+a, button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Avoid horizontal scroll on small screens (hover transforms) */
+@media (max-width: 640px) {
+    .notice-item:hover {
+        transform: none !important;
+    }
+}
+
+/* ========== Tablet (768×570) – reference from 320×427 mobile ========== */
+/* At 768px width: full nav, compact vertical rhythm for 570px height */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Slightly tighter section padding on tablet so more fits in 570px viewport */
+    .tablet-py-section {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+    /* Hero: allow a bit more content visible on short tablet */
+    .tablet-hero-content {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+/* Tablet: top bar – compact so it doesn’t overflow */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .top-bar-tablet {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.25rem 0.5rem;
+    }
+    .top-bar-tablet .top-bar-left {
+        flex-wrap: wrap;
+        gap: 0 0.75rem;
+        font-size: 0.65rem;
+    }
+    .top-bar-tablet .top-bar-left span {
+        white-space: nowrap;
+    }
+}
+
+/* Tablet: nav – prevent overflow, compact links */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .nav-tablet {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    .nav-tablet .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.375rem 0.5rem;
+        font-size: 0.8125rem;
+    }
+    .nav-tablet .nav-links a:not(.nav-cta):not(.nav-admin) {
+        padding: 0.25rem 0.375rem;
+    }
+    .nav-tablet .nav-cta {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.8125rem;
+    }
+    .nav-tablet .nav-admin {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Tablet: footer – 2 columns, smaller text */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .footer-tablet h3 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    .footer-tablet .footer-text,
+    .footer-tablet ul {
+        font-size: 0.8125rem;
+    }
+    .footer-tablet .footer-map {
+        height: 8rem;
+    }
+}
+
+/* News detail modal: better on 320px narrow screens */
+.news-detail-modal-inner {
+    min-height: 0;
+}
+@media (max-width: 380px) {
+    #newsDetailContent {
+        padding-left: 0.875rem;
+        padding-right: 0.875rem;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #002147;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Swiper Customization */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #D4AF37 !important;
+    /* school-gold */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+}
+
+/* ========== Scroll-triggered animations (all pages) ========== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.scroll-reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-32px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.scroll-reveal-left.in-view {
+    opacity: 1;
+    transform: translateX(0);
+}
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.scroll-reveal-right.in-view {
+    opacity: 1;
+    transform: translateX(0);
+}
+.scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.scroll-reveal-scale.in-view {
+    opacity: 1;
+    transform: scale(1);
+}
+/* Stagger delays for children */
+.scroll-reveal-stagger-1 { transition-delay: 0.1s; }
+.scroll-reveal-stagger-2 { transition-delay: 0.2s; }
+.scroll-reveal-stagger-3 { transition-delay: 0.3s; }
+.scroll-reveal-stagger-4 { transition-delay: 0.4s; }

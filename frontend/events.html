@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - School Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'school-blue': '#002147',
+                        'school-gold': '#D4AF37',
+                        'school-red': '#8B0000',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+    <!-- Top Bar (tablet: compact via .top-bar-tablet in styles.css) -->
+    <div class="bg-white text-gray-800 text-xs hidden md:flex items-center fixed w-full z-50 top-0 shadow-sm min-h-8 py-1">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center w-full top-bar-tablet">
+            <div class="flex items-center flex-wrap gap-x-4 gap-y-0.5 top-bar-left">
+                <span class="whitespace-nowrap"><i class="fas fa-map-marker-alt text-school-blue mr-1.5"></i>123 Education Lane</span>
+                <span class="whitespace-nowrap"><i class="fas fa-phone-alt text-school-blue mr-1.5"></i>+1 (234) 567-890</span>
+                <span class="whitespace-nowrap"><i class="fas fa-envelope text-school-blue mr-1.5"></i>info@schooldemo.edu</span>
+            </div>
+            <div class="flex space-x-3 flex-shrink-0">
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-school-blue transition p-0.5"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (tablet: compact via .nav-tablet in styles.css) -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-school-blue text-white py-2 sm:py-3 md:py-3 shadow-lg top-0 md:top-8 nav-tablet">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center max-w-full">
+            <a href="index.html" class="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold font-serif tracking-wide flex items-center shrink-0">
+                <i class="fas fa-graduation-cap text-school-gold mr-1.5 sm:mr-2 text-xl sm:text-2xl md:text-2xl lg:text-3xl"></i>
+                <span>School<span class="text-school-gold">Demo</span></span>
+            </a>
+
+            <div class="hidden md:flex nav-links space-x-2 lg:space-x-6 xl:space-x-8 items-center font-medium text-xs md:text-sm lg:text-base">
+                <a href="index.html" class="hover:text-school-gold transition whitespace-nowrap">Home</a>
+                <a href="about.html" class="hover:text-school-gold transition whitespace-nowrap">About</a>
+                <a href="news.html" class="hover:text-school-gold transition whitespace-nowrap">News</a>
+                <a href="notices.html" class="hover:text-school-gold transition whitespace-nowrap">Notices</a>
+                <a href="events.html" class="text-school-gold font-bold whitespace-nowrap">Events</a>
+                <a href="contact.html" class="nav-cta bg-school-gold text-school-blue px-3 py-1.5 md:px-6 md:py-2 rounded-full font-bold hover:bg-white hover:text-school-blue transition shadow-lg whitespace-nowrap">Contact Us</a>
+                <a href="login.html" class="nav-admin text-xs border border-white px-2 py-1 md:px-4 md:py-2 rounded-full hover:bg-white hover:text-school-blue transition whitespace-nowrap">Admin Login</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-2 -m-2 text-xl focus:outline-none touch-manipulation" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-school-blue absolute w-full left-0 top-full shadow-xl fade-in-down">
+            <div class="flex flex-col p-4 sm:p-6 space-y-1 sm:space-y-4 text-center">
+                <a href="index.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Home</a>
+                <a href="about.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">About</a>
+                <a href="news.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">News</a>
+                <a href="notices.html" class="block py-3 sm:py-2 hover:text-school-gold transition text-sm sm:text-base">Notices</a>
+                <a href="events.html" class="block py-3 sm:py-2 text-school-gold font-bold text-sm sm:text-base">Events</a>
+                <a href="contact.html" class="block py-3 sm:py-2 text-school-gold font-bold text-sm sm:text-base">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-school-blue text-white pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold mb-4 fade-in-up">Upcoming Events</h1>
+            <p class="text-sm sm:text-base md:text-xl text-blue-200 max-w-2xl mx-auto fade-in-up text-center">Join us for these exciting upcoming events and
+                activities.</p>
+        </div>
+    </header>
+
+    <!-- Events List -->
+    <section class="scroll-reveal py-12 sm:py-20 bg-background">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div id="events-container" class="space-y-6 max-w-4xl mx-auto">
+                <!-- Events loaded via JS -->
+                <div class="text-center py-20">
+                    <div
+                        class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-school-blue">
+                    </div>
+                    <p class="mt-4 text-gray-500">Loading events...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white pt-12 sm:pt-14 md:pt-16 pb-6 sm:pb-8 border-t-4 border-school-gold footer-tablet">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
+                <div>
+                    <a href="index.html" class="text-xl sm:text-2xl font-bold font-serif tracking-wide flex items-center mb-4 sm:mb-6">
+                        <i class="fas fa-graduation-cap text-school-gold mr-2 text-2xl sm:text-3xl"></i>
+                        <span>School<span class="text-school-gold">Demo</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+                        Empowering students to query freely, think critically, and act responsibly.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-school-gold hover:text-school-blue transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-school-gold">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>About Us</a></li>
+                        <li><a href="admissions.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Admissions</a></li>
+                        <li><a href="news.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>News</a>
+                        </li>
+                        <li><a href="notices.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Notices</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Events</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-school-gold">Academics</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Pre-Primary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Primary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>Secondary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition"><i
+                                    class="fas fa-chevron-right mr-2 text-xs text-school-gold"></i>High School</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-school-gold">Contact Info</h3>
+                    <ul class="space-y-4 text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-school-gold"></i>
+                            <span>123 Education Lane, Knowledge City, Country 56789</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-school-gold"></i>
+                            <span>+1 (234) 567-890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-school-gold"></i>
+                            <span>info@schooldemo.edu</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 mt-6 sm:mt-8 text-center text-gray-500 text-xs sm:text-sm">
+                <p>&copy; 2026 School Demo. All Rights Reserved. | Designed with <i
+                        class="fas fa-heart text-school-red"></i> by NesQByte</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/scroll-reveal.js"></script>
+</body>
+
+</html>
