@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://active-news-api.onrender.com";
 
 // Helper to format date
 function formatDate(dateString) {
@@ -788,56 +788,87 @@ $(document).ready(function () {
                 url: API_BASE_URL + "/hero-images/" + id,
                 type: "DELETE",
                 success: function () {
+                    // Clear localStorage cache so it refreshes
+                    localStorage.removeItem('heroImages');
                     loadHeroImagesAdmin();
                 }
             });
         }
     });
 
+    function renderHeroSlides(data) {
+        if (!data || data.length === 0) return;
+
+        // Prevent re-rendering if data hasn't changed (simple JSON string comparison from cache or previous fetch)
+        const currentDataStr = JSON.stringify(data);
+        const lastRenderedStr = $(".mySwiper").data("rendered-data");
+
+        if (currentDataStr === lastRenderedStr) {
+            console.log("Hero images already up to date.");
+            return;
+        }
+
+        let slidesHtml = "";
+        data.forEach(img => {
+            slidesHtml += `
+                <div class="swiper-slide relative">
+                    <img src="${img.imageURL}" alt="School Banner" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/70"></div>
+                </div>
+            `;
+        });
+
+        const swiperWrapper = $(".mySwiper .swiper-wrapper");
+        swiperWrapper.html(slidesHtml);
+
+        // Mark as rendered with this data
+        $(".mySwiper").data("rendered-data", currentDataStr);
+
+        // Re-initialize swiper
+        if (window.myHeroSwiper) {
+            window.myHeroSwiper.destroy(true, true);
+        }
+
+        window.myHeroSwiper = new Swiper(".mySwiper", {
+            spaceBetween: 0,
+            effect: "fade",
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    }
+
     function loadHeroImagesIndex() {
         if (!$(".mySwiper").length) return;
 
+        // 1. Try to load from localStorage first for instant render
+        const cachedImages = localStorage.getItem('heroImages');
+        if (cachedImages) {
+            try {
+                const data = JSON.parse(cachedImages);
+                renderHeroSlides(data);
+            } catch (e) {
+                console.error("Error parsing cached hero images", e);
+            }
+        }
+
+        // 2. Fetch fresh data from API
         $.get(API_BASE_URL + "/hero-images", function (data) {
-            if (data.length > 0) {
-                let slidesHtml = "";
-                data.forEach(img => {
-                    slidesHtml += `
-                        <div class="swiper-slide relative">
-                            <img src="${img.imageURL}" alt="School Banner" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black/50"></div>
-                        </div>
-                    `;
-                });
-                // Find the swiper instance and update slides
-                // Since we initialize swiper on doc ready, we might need to destroy and re-init or just append slides if possible.
-                // Simpler approach: Replace HTML and re-init swiper if needed, or just append slides before init if we call this early.
-                // But this is async. 
-
-                const swiperWrapper = $(".mySwiper .swiper-wrapper");
-                swiperWrapper.html(slidesHtml);
-
-                // Re-initialize swiper (if it was already initialized, it might look weird, but let's try)
-                if (window.myHeroSwiper) {
-                    window.myHeroSwiper.destroy(true, true);
-                }
-
-                window.myHeroSwiper = new Swiper(".mySwiper", {
-                    spaceBetween: 0,
-                    effect: "fade",
-                    loop: true,
-                    autoplay: {
-                        delay: 5000,
-                        disableOnInteraction: false,
-                    },
-                    pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                    },
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                });
+            if (data && data.length > 0) {
+                // Update localStorage
+                localStorage.setItem('heroImages', JSON.stringify(data));
+                // Render (function handles deduping)
+                renderHeroSlides(data);
             }
         });
     }
